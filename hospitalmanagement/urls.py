@@ -67,7 +67,7 @@ urlpatterns = [
 ]
 
 
-#---------URL cho bác sĩ-------------------------------------
+#---------URL cho bác sĩ------------------------------------
 urlpatterns +=[
     path('doctor-dashboard', views.doctor_dashboard_view,name='doctor-dashboard'),
     path('search', views.search_view,name='search'),
