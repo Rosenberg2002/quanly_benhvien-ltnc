@@ -1,231 +1,205 @@
 {% extends 'hospital/admin_base.html' %}
 {% load static %}
 {% block content %}
+  <head>
+    <meta charset="utf-8" />
+    <title>Xuất hóa đơn</title>
 
-<head>
-  <meta charset="utf-8">
-  <title>Xuất hóa đơn</title>
-
-  <style>
-    .invoice-box {
-      max-width: 800px;
-      margin: auto;
-      padding: 30px;
-      border: 1px solid #eee;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-      font-size: 16px;
-      line-height: 24px;
-      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-      color: #555;
-    }
-
-    .invoice-box table {
-      width: 100%;
-      line-height: inherit;
-      text-align: left;
-    }
-
-    .invoice-box table td {
-      padding: 5px;
-      vertical-align: top;
-    }
-
-    .invoice-box table tr td:nth-child(2) {
-      text-align: right;
-    }
-
-    .invoice-box table tr.top table td {
-      padding-bottom: 20px;
-    }
-
-    .invoice-box table tr.top table td.title {
-      font-size: 45px;
-      line-height: 45px;
-      color: #333;
-    }
-
-    .invoice-box table tr.information table td {
-      padding-bottom: 40px;
-    }
-
-    .invoice-box table tr.heading td {
-      background: #eee;
-      border-bottom: 1px solid #ddd;
-      font-weight: bold;
-    }
-
-    .invoice-box table tr.details td {
-      padding-bottom: 20px;
-    }
-
-    .invoice-box table tr.item td {
-      border-bottom: 1px solid #eee;
-    }
-
-    .invoice-box table tr.item.last td {
-      border-bottom: none;
-    }
-
-    .invoice-box table tr.total td:nth-child(2) {
-      border-top: 2px solid #eee;
-      font-weight: bold;
-    }
-
-    @media only screen and (max-width: 600px) {
+    <style>
+      .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+      }
+      
+      .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+      }
+      
+      .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+      }
+      
+      .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+      }
+      
       .invoice-box table tr.top table td {
-        width: 100%;
-        display: block;
-        text-align: center;
+        padding-bottom: 20px;
       }
-
+      
+      .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+      }
+      
       .invoice-box table tr.information table td {
-        width: 100%;
-        display: block;
-        text-align: center;
+        padding-bottom: 40px;
       }
-    }
+      
+      .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+      }
+      
+      .invoice-box table tr.details td {
+        padding-bottom: 20px;
+      }
+      
+      .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+      }
+      
+      .invoice-box table tr.item.last td {
+        border-bottom: none;
+      }
+      
+      .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+      }
+      
+      @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      
+        .invoice-box table tr.information table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+      
+      /** RTL **/
+      .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+      }
+      
+      .rtl table {
+        text-align: right;
+      }
+      
+      .rtl table tr td:nth-child(2) {
+        text-align: left;
+      }
+      
+      .menu {
+        top: 50px;
+      }
+    </style>
+  </head>
 
-    /** RTL **/
-    .rtl {
-      direction: rtl;
-      font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    }
+  <br /><br /><br />
+  <div class="invoice-box">
+    <table cellpadding="0" cellspacing="0">
+      <tr class="top">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td class="title">
+                <h1>Bach Khoa Hospital</h1>
+              </td>
 
-    .rtl table {
-      text-align: right;
-    }
-
-    .rtl table tr td:nth-child(2) {
-      text-align: left;
-    }
-
-    .menu {
-      top: 50px;
-    }
-  </style>
-</head>
-
-<br><br><br>
-<div class="invoice-box">
-  <table cellpadding="0" cellspacing="0">
-    <tr class="top">
-      <td colspan="2">
-        <table>
-          <tr>
-            <td class="title">
-              <h1>Hospital Management</h1>
-            </td>
-
-            <td>
-
-              Admit Date: {{admitDate}}<br>
-              Release Date: {{todayDate}}<br>
-              Days Spent: {{day}}
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-
-    <tr class="information">
-      <td colspan="2">
-        <table>
-          <tr>
-            <td>
-              Patient Name : {{name}}<br>
-              Patient Mobile : {{mobile}}<br>
-              Patient Addres : {{address}}<br>
-            </td>
-
-            <td>
-              Doctor Name :<br>
-              {{assignedDoctorName}}<br>
-
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-
-    <tr class="heading">
-      <td>
-        Disease and Symptoms
-      </td>
-      <td>
-
-      </td>
-
-    </tr>
-
-    <tr class="details">
-      <td>
-        {{symptoms}}
-      </td>
-    </tr>
-    <tr class="heading">
-      <td>
-        Item
-      </td>
-
-      <td>
-        Price
-      </td>
-    </tr>
-    <form method="post">
-      {% csrf_token %}
-
-      <tr class="item">
-        <td>
-          Room Charge (Per Day)
-        </td>
-
-        <td>
-          <input type="number" name="roomCharge" placeholder="Nghìn Đồng" value="">
+              <td>
+                Ngày nhập viện: {{ admitDate }}<br />
+                Ngày xuất viện: {{ todayDate }}<br />
+                Ngày nằm viện: {{ day }}
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
 
-      <tr class="item">
-        <td>
-          Doctor Fee
-        </td>
+      <tr class="information">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td>
+                Tên bệnh nhân : {{ name }}<br />
+                Số điện thoại : {{ mobile }}<br />
+                Địa chỉ : {{ address }}<br />
+              </td>
 
-        <td>
-          <input type="number" name="doctorFee" placeholder="Nghìn Đồng" value="">
-        </td>
-      </tr>
-
-      <tr class="item">
-        <td>
-          Medicine Cost
-        </td>
-
-        <td>
-          <input type="number" name="medicineCost" placeholder="Nghìn Đồng" value="">
-        </td>
-      </tr>
-
-      <tr class="item last">
-        <td>
-          Other Charge
-        </td>
-
-        <td>
-          <input type="number" name="OtherCharge" placeholder="Nghìn Đồng" value="">
+              <td>
+                Bác sĩ phụ trách :<br />
+                {{ assignedDoctorName }}<br />
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
 
-      <tr class="total">
+      <tr class="heading">
+        <td>Bệnh và triệu chứng</td>
         <td></td>
-
-        <td>
-          <input type="submit" name="submit" value="Xuất hóa đơn">
-        </td>
       </tr>
 
-    </form>
-  </table>
-</div>
+      <tr class="details">
+        <td>{{ symptoms }}</td>
+      </tr>
+      <tr class="heading">
+        <td>Dịch vụ</td>
 
+        <td>Giá</td>
+      </tr>
+      <form method="post">
+        {% csrf_token %}
 
+        <tr class="item">
+          <td>Viện phí (theo ngày)</td>
 
-{% endblock content %}
+          <td>
+            <input type="number" name="roomCharge" placeholder="Nghìn Đồng" value="" />
+          </td>
+        </tr>
+
+        <tr class="item">
+          <td>Phí bác sĩ</td>
+
+          <td>
+            <input type="number" name="doctorFee" placeholder="Nghìn Đồng" value="" />
+          </td>
+        </tr>
+
+        <tr class="item">
+          <td>Phí thuốc men</td>
+
+          <td>
+            <input type="number" name="medicineCost" placeholder="Nghìn Đồng" value="" />
+          </td>
+        </tr>
+
+        <tr class="item last">
+          <td>Phí khác</td>
+
+          <td>
+            <input type="number" name="OtherCharge" placeholder="Nghìn Đồng" value="" />
+          </td>
+        </tr>
+
+        <tr class="total">
+          <td></td>
+
+          <td>
+            <input type="submit" name="submit" value="Xuất hóa đơn" />
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+{% endblock %}
