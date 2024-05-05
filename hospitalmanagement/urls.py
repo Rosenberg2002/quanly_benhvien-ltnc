@@ -5,7 +5,7 @@ from hospital import views
 from django.contrib.auth.views import LoginView,LogoutView
 
 
-#-------------FOR ADMIN RELATED URLS
+#-------------URL cho admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home_view,name=''),
@@ -67,7 +67,7 @@ urlpatterns = [
 ]
 
 
-#---------FOR DOCTOR RELATED URLS-------------------------------------
+#---------URL cho bác sĩ-------------------------------------
 urlpatterns +=[
     path('doctor-dashboard', views.doctor_dashboard_view,name='doctor-dashboard'),
     path('search', views.search_view,name='search'),
@@ -82,14 +82,14 @@ urlpatterns +=[
     path('delete-appointment/<int:pk>', views.delete_appointment_view,name='delete-appointment'),
     
     
-    path('doctor-medicine', views.doctor_medicine_view,name='doctor-medicine'),
+    path('doctor-medicine', views.doctor_medicine,name='doctor-medicine'),
 
 ]
 
 
 
 
-#---------FOR PATIENT RELATED URLS-------------------------------------
+#---------URL cho bệnh nhân-------------------------------------
 urlpatterns +=[
 
     path('patient-dashboard', views.patient_dashboard_view,name='patient-dashboard'),

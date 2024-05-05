@@ -47,6 +47,7 @@ class Patient(models.Model):
         return self.user.first_name+" ("+self.symptoms+")"
 
 
+
 class Appointment(models.Model):
     patientId=models.PositiveIntegerField(null=True)
     doctorId=models.PositiveIntegerField(null=True)

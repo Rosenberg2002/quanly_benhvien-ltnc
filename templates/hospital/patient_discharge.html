@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>A simple, clean, and responsive HTML invoice template</title>
+  <title>Xuất hóa đơn</title>
 
   <style>
     .invoice-box {
@@ -181,7 +181,7 @@
 
     <tr class="item">
       <td>
-        Room Charge of {{daySpent}} Days
+        Phí nằm viện {{daySpent}} ngày
       </td>
 
       <td>
@@ -191,7 +191,7 @@
 
     <tr class="item">
       <td>
-        Doctor Fee
+        Phí bác sĩ
       </td>
 
       <td>
@@ -201,7 +201,7 @@
 
     <tr class="item">
       <td>
-        Medicine Cost
+        Phí thuốc men
       </td>
 
       <td>
@@ -211,7 +211,7 @@
 
     <tr class="item last">
       <td>
-        Other Charge
+        Phí khác
       </td>
 
       <td>
@@ -223,7 +223,7 @@
       <td></td>
 
       <td>
-        Total Rupees : {{total}}
+        Tổng : {{total}}
       </td>
     </tr>
 
@@ -231,15 +231,15 @@
 </div>
 <br><br>
 <div class="download">
-  <a style="background:red; width:500px;" href="{% url 'download-pdf' patientId  %}">Download</a>
+  <a style="background:red; width:500px;" href="{% url 'download-pdf' patientId  %}">Tải về</a>
 </div>
 
 
 
 {%else%}
-<h5 style="text-align:center;">You Are Not Discharged By Hospital !</h5>
-<h5 style="text-align:center;">Your Treatment Is Going On !</h5><br><br>
-<h6 style="text-align:center;">When You Will Be Discahrged. You Can Download Invoice.</h6>
+<h5 style="text-align:center;">Bạn chưa được cho xuất việc</h5>
+<h5 style="text-align:center;">Bạn vẫn đang được điều trị</h5><br><br>
+<h6 style="text-align:center;">Hãy liên hệ bác sĩ của bạn nếu cần được xuất viện sớm.</h6>
 {%endif%}
 
 <br><br><br><br><br><br><br><br>

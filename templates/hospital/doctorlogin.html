@@ -58,7 +58,6 @@
   <br>
   <br><br>
 
-  <!--- trang đăng nhập cho bác sĩ  ---------->
   <form method="post">
     {% csrf_token %}
     <div class="container register-form">
@@ -72,7 +71,7 @@
             <div class="col-md-6">
 
               <div class="form-group">
-                {% render_field form.username class="form-control" placeholder="Tên" %}
+                {% render_field form.username class="form-control" placeholder="Tên đăng nhập" %}
               </div>
 
             </div>
